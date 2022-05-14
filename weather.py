@@ -1,7 +1,7 @@
 import csv
 from datetime import datetime
 
-DEGREE_SYBMOL = u"\N{DEGREE SIGN}C"
+DEGREE_SYMBOL = u"\N{DEGREE SIGN}C"
 
 
 def format_temperature(temp):
@@ -13,7 +13,7 @@ def format_temperature(temp):
     Returns:
         A string contain the temperature and "degrees celcius."
     """
-    return f"{temp}{DEGREE_SYBMOL}"
+    return f"{temp}{DEGREE_SYMBOL}"
 
 
 def convert_date(iso_string):
@@ -24,18 +24,23 @@ def convert_date(iso_string):
     Returns:
         A date formatted like: Weekday Date Month Year e.g. Tuesday 06 July 2021
     """
-    pass
+
+    date = datetime.strptime(iso_string, "%Y-%m-%dT%H:%M:%S%z")
+    date_new = datetime.strftime(date, "%A %d %B %Y")
+    return date_new
 
 
-def convert_f_to_c(temp_in_farenheit):
-    """Converts an temperature from farenheit to celcius.
+def convert_f_to_c(temp_in_fahrenheit):
+    """Converts an temperature from fahrenheit to celcius.
 
     Args:
-        temp_in_farenheit: float representing a temperature.
+        temp_in_fahrenheit: float representing a temperature.
     Returns:
         A float representing a temperature in degrees celcius, rounded to 1dp.
     """
-    pass
+    temp_in_fahrenheit = float(temp_in_fahrenheit)
+    temp_in_celsius = round((temp_in_fahrenheit - 32) * (5 / 9), 1)
+    return temp_in_celsius
 
 
 def calculate_mean(weather_data):
@@ -46,7 +51,15 @@ def calculate_mean(weather_data):
     Returns:
         A float representing the mean value.
     """
-    pass
+
+    weather_data =
+    total = a + b + c + d
+    mean = total / 4
+    return mean
+    print(calculate_mean(4, 3, 2, 6))
+
+    calculate_mean(x, x,)
+    calculate_mean(4, 6)
 
 
 def load_data_from_csv(csv_file):
