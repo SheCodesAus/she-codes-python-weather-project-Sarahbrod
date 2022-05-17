@@ -51,9 +51,11 @@ def calculate_mean(weather_data):
     Returns:
         A float representing the mean value.
     """
-    weather_data_float = [float(i) for i in weather_data]
-    total = sum(weather_data_float)
-    mean = total / len(weather_data_float)
+    # weather_data_float = float(weather_data)
+    total = 0
+    for i in weather_data:
+        total = total + float(i)
+        mean = total / len(weather_data)
     return mean
 
 
@@ -71,8 +73,12 @@ def load_data_from_csv(csv_file):
         next(reader)
         for line in reader:
             if len(line) > 0:
-                csv_list.append(line)
+                csv_list.append([line[0], int(line[1]), int(line[2])])
     return csv_list
+
+
+print(load_data_from_csv(
+    "tests/data/example_two.csv"))
 
 
 def find_min(weather_data):
@@ -135,7 +141,12 @@ def generate_summary(weather_data):
     Returns:
         A string containing the summary information.
     """
-    pass
+    if len(weather_data) == 0:
+        return ()
+    else:
+        find_min([])
+        convert_f_to_c([])
+        convert_date([])
 
 
 def generate_daily_summary(weather_data):
