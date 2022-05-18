@@ -1,5 +1,6 @@
 import csv
 from datetime import datetime
+from operator import index
 
 DEGREE_SYMBOL = u"\N{DEGREE SIGN}C"
 
@@ -141,12 +142,40 @@ def generate_summary(weather_data):
     Returns:
         A string containing the summary information.
     """
-    if len(weather_data) == 0:
-        return ()
-    else:
-        find_min([])
-        convert_f_to_c([])
-        convert_date([])
+
+    date = []
+    min_temp = []
+    max_temp = []
+    number_of_days = len(weather_data)
+
+    for item in weather_data:
+        if item != []:
+            date.append(item[0])
+            min_temp.append(item[1])
+            max_temp.append(item[2])
+
+    min_temperature_f, index_min = find_min(min_temp)
+    max_temperature_f, index_max = find_max(max_temp)
+
+    min_temp_c = convert_f_to_c(str(min_temperature_f))
+    max_temp_c = convert_f_to_c(str(max_temperature_f))
+
+    date_min = date[index_min]
+    date_max = date[index_max]
+
+    average_min_f = calculate_mean(min_temp)
+    average_max_f = calculate_mean(max_temp)
+
+    average_min_c = convert_f_to_c(average_min_f)
+    average_max_c = convert_f_to_c(average_max_f)
+
+    result = ""
+    result += f"{number_of_days} Day Overview\n"
+    result += f"  The lowest temperature will be {format_temperature(min_temp_c)}, and will occur on {convert_date(date_min)}.\n"
+    result += f"  The highest temperature will be {format_temperature(max_temp_c)}, and will occur on {convert_date(date_max)}.\n"
+    result += f"  The average low this week is {format_temperature(average_min_c)}.\n"
+    result += f"  The average high this week is {format_temperature(average_max_c)}.\n"
+    return result
 
 
 def generate_daily_summary(weather_data):
@@ -157,4 +186,9 @@ def generate_daily_summary(weather_data):
     Returns:
         A string containing the summary information.
     """
-    pass
+
+    result = ""
+    result += f" ----{date} ----\n"
+    result += f"Minimum Temperature:{}\n"
+    result += f"Maximum Temperature:{}\n"
+    return result
