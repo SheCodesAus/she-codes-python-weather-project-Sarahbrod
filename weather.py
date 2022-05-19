@@ -188,7 +188,10 @@ def generate_daily_summary(weather_data):
     """
 
     result = ""
-    result += f" ----{date} ----\n"
-    result += f"Minimum Temperature:{}\n"
-    result += f"Maximum Temperature:{}\n"
+
+    for item in weather_data:
+        result += f"---- {convert_date(item[0])} ----\n"
+        result += f"  Minimum Temperature: {format_temperature(convert_f_to_c(item[1]))}\n"
+        result += f"  Maximum Temperature: {format_temperature(convert_f_to_c(item[2]))}\n"
+        result += "\n"
     return result
